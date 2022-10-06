@@ -2,6 +2,7 @@ import Topo from "./Topo"
 import Filmes from "./Filmes"
 import Sessao from "./Sessão"
 import Rodape from "./Rodape"
+import Assentos from "./Assentos"
 
 
 export default function App(){
@@ -9,7 +10,8 @@ export default function App(){
         <>
         <Topo/>
         {/*<Filmes/>*/}
-        <Sessao/>
+        {/*<Sessao/>*/}
+        <Assentos/>
         <Rodape/>
         </>
     )
