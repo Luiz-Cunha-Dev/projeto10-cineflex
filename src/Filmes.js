@@ -5,12 +5,14 @@ export default function Filmes(){
         <>
         <Texto><p>Selecione o filme</p></Texto>
         <FilmesSite>
-            <img src="https://st2.depositphotos.com/6544740/9337/i/600/depositphotos_93376372-stock-photo-sunset-over-sea-pier.jpg" alt="mar" />
-            <img src="https://st2.depositphotos.com/6544740/9337/i/600/depositphotos_93376372-stock-photo-sunset-over-sea-pier.jpg" alt="mar" />
-            <img src="https://st2.depositphotos.com/6544740/9337/i/600/depositphotos_93376372-stock-photo-sunset-over-sea-pier.jpg" alt="mar" />
-            <img src="https://st2.depositphotos.com/6544740/9337/i/600/depositphotos_93376372-stock-photo-sunset-over-sea-pier.jpg" alt="mar" />
-            <img src="https://st2.depositphotos.com/6544740/9337/i/600/depositphotos_93376372-stock-photo-sunset-over-sea-pier.jpg" alt="mar" />
-            <img src="https://st2.depositphotos.com/6544740/9337/i/600/depositphotos_93376372-stock-photo-sunset-over-sea-pier.jpg" alt="mar" />
+            <Moldura><img src="https://st2.depositphotos.com/6544740/9337/i/600/depositphotos_93376372-stock-photo-sunset-over-sea-pier.jpg" alt="mar" /></Moldura>
+            <Moldura><img src="https://st2.depositphotos.com/6544740/9337/i/600/depositphotos_93376372-stock-photo-sunset-over-sea-pier.jpg" alt="mar" /></Moldura>
+            <Moldura><img src="https://st2.depositphotos.com/6544740/9337/i/600/depositphotos_93376372-stock-photo-sunset-over-sea-pier.jpg" alt="mar" /></Moldura>
+            <Moldura><img src="https://st2.depositphotos.com/6544740/9337/i/600/depositphotos_93376372-stock-photo-sunset-over-sea-pier.jpg" alt="mar" /></Moldura>
+            <Moldura><img src="https://st2.depositphotos.com/6544740/9337/i/600/depositphotos_93376372-stock-photo-sunset-over-sea-pier.jpg" alt="mar" /></Moldura>
+            <Moldura><img src="https://st2.depositphotos.com/6544740/9337/i/600/depositphotos_93376372-stock-photo-sunset-over-sea-pier.jpg" alt="mar" /></Moldura>
+            <Moldura><img src="https://st2.depositphotos.com/6544740/9337/i/600/depositphotos_93376372-stock-photo-sunset-over-sea-pier.jpg" alt="mar" /></Moldura>
+            <Moldura><img src="https://st2.depositphotos.com/6544740/9337/i/600/depositphotos_93376372-stock-photo-sunset-over-sea-pier.jpg" alt="mar" /></Moldura>
         </FilmesSite>
         </>
     )
@@ -23,7 +25,7 @@ justify-content: space-around;;
 img{
 width: 129px;
 height: 193px;
-margin-bottom: 27px;
+margin: 8px;
 }
 `
 
@@ -46,4 +48,11 @@ text-align: center;
 letter-spacing: 0.04em;
 color: #293845;
 }
+`
+
+const Moldura = styled.div`
+background: #FFFFFF;
+box-shadow: 0px 2px 4px 2px rgba(0, 0, 0, 0.1);
+border-radius: 3px;
+margin-bottom: 27px;
 `
