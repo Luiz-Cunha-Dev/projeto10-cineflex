@@ -1,66 +1,47 @@
 import styled from "styled-components"
 import Inputs from "./Inputs"
 import Rodape from "./Rodape"
+import { useParams } from "react-router-dom"
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
 
 export default function Assentos(){
+
+    const [sessao, setSessao] = useState([]);
+    const [assentos, setAssentos] = useState([]);
+    const [filme, setFilme] = useState([]);
+    const [dia, setDia] = useState([]);
+    const {idSessao} = useParams();
+    useEffect(() => {
+        const URL = `https://mock-api.driven.com.br/api/v8/cineflex/showtimes/${idSessao}/seats`
+		const requisicao = axios.get(URL);
+
+		requisicao.then(resposta => {
+			setSessao(resposta.data);
+            setAssentos(resposta.data.seats)
+            setFilme(resposta.data.movie);
+            setDia(resposta.data.day)
+            console.log(resposta.data);
+		});
+
+		requisicao.catch(erro => {
+			console.log(erro.response.data);
+		});
+	}, []);
+
+    if(sessao === []){
+        return(
+            <p>Loading...</p>
+        )
+    }
+
     return(
         <ContainerAssentos>
         <Texto><p>Selecione o(s) assento(s)</p></Texto>
         <QuadroAcentos>
-            <button>01</button>
-            <button>02</button>
-            <button>03</button>
-            <button>04</button>
-            <button>05</button>
-            <button>06</button>
-            <button>07</button>
-            <button>08</button>
-            <button>09</button>
-            <button>10</button>
-
-            <button>01</button>
-            <button>02</button>
-            <button>03</button>
-            <button>04</button>
-            <button>05</button>
-            <button>06</button>
-            <button>07</button>
-            <button>08</button>
-            <button>09</button>
-            <button>10</button>
-
-            <button>01</button>
-            <button>02</button>
-            <button>03</button>
-            <button>04</button>
-            <button>05</button>
-            <button>06</button>
-            <button>07</button>
-            <button>08</button>
-            <button>09</button>
-            <button>10</button>
-
-            <button>01</button>
-            <button>02</button>
-            <button>03</button>
-            <button>04</button>
-            <button>05</button>
-            <button>06</button>
-            <button>07</button>
-            <button>08</button>
-            <button>09</button>
-            <button>10</button>
-
-            <button>01</button>
-            <button>02</button>
-            <button>03</button>
-            <button>04</button>
-            <button>05</button>
-            <button>06</button>
-            <button>07</button>
-            <button>08</button>
-            <button>09</button>
-            <button>10</button>
+            {assentos.map(a => <button key={a.name}>{a.name}</button>)}
+            
         </QuadroAcentos>
         <Legenda >
             <Tipo cor={"#1AAE9E"} corBorda={"#0E7D71"}>
@@ -77,7 +58,9 @@ export default function Assentos(){
             </Tipo>
         </Legenda>
         <Inputs/>
-        <Rodape/>
+        <Rodape imagem={filme.posterURL} filme={filme.title}>
+             <br/> {dia.weekday} - {sessao.name}
+        </Rodape>          
         </ContainerAssentos>
     )
 }
@@ -126,9 +109,6 @@ font-style: normal;
 font-weight: 400;
 font-size: 11px;
 line-height: 13px;
-display: flex;
-align-items: center;
-text-align: center;
 letter-spacing: 0.04em;
 color: #000000;
 }

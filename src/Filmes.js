@@ -3,16 +3,16 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
+
 export default function Filmes(){
-    const [items, setItems] = useState([]);
+    const [itens, setItens] = useState([]);
 
     useEffect(() => {
         const URL = "https://mock-api.driven.com.br/api/v8/cineflex/movies"
 		const requisicao = axios.get(URL);
 
 		requisicao.then(resposta => {
-			setItems(resposta.data);
-            console.log(resposta);
+			setItens(resposta.data);
 		});
 
 		requisicao.catch(erro => {
@@ -24,7 +24,7 @@ export default function Filmes(){
         <>
         <Texto><p>Selecione o filme</p></Texto>
         <FilmesSite>
-            {items.map(i => <Link to={`/sessoes/${i.id}`}><Moldura><img src={i.posterURL} alt={i.title} /></Moldura></Link> )}
+            {itens.map(i => <Link to={`/sessoes/${i.id}`}><Moldura><img key={i.id} src={i.posterURL} alt={i.title} /></Moldura></Link> )}
         </FilmesSite>
         </>
     )

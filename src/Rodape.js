@@ -1,11 +1,10 @@
 import styled from "styled-components"
 
-export default function Rodape(){
+export default function Rodape(props){
     return(
         <RodapePagina>
-            <Moldura><img src="https://st2.depositphotos.com/6544740/9337/i/600/depositphotos_93376372-stock-photo-sunset-over-sea-pier.jpg" alt="teste" /></Moldura>
-            <p>Enola Holmes<br/>Quinta-feira - 15:00</p>
-
+            <Moldura><img src={props.imagem} alt={props.filme} /></Moldura>
+            <p>{props.filme}{props.children}</p>
         </RodapePagina>
 
     )
@@ -27,11 +26,14 @@ height: 72px;
 margin: 8px;
 }
 p{
+margin-top: 10px;
 font-family: 'Roboto';
 font-style: normal;
 font-weight: 400;
 font-size: 26px;
 line-height: 30px;
+display: flex;
+align-items: center;
 color: #293845;
 }
 `

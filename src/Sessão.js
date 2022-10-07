@@ -1,18 +1,46 @@
 import styled from "styled-components"
 import Rodape from "./Rodape"
+import { useParams } from "react-router-dom"
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
 
 export default function Sessao(){
+    const [sessao, setSessao] = useState([]);
+    const [dias, setDias] = useState([]);
+    const {idFilme} = useParams();
+    useEffect(() => {
+        const URL = `https://mock-api.driven.com.br/api/v8/cineflex/movies/${idFilme}/showtimes`
+		const requisicao = axios.get(URL);
+
+		requisicao.then(resposta => {
+			setSessao(resposta.data);
+            console.log(resposta.data);
+            setDias(resposta.data.days)
+		});
+
+		requisicao.catch(erro => {
+			console.log(erro.response.data);
+		});
+	}, []);
+
+
     return(
         <>
         <Texto><p>Selecione o horário</p></Texto>
         <SessoesDisponiveis>
-            <p>Quinta-feira - 24/06/2021</p>
-            <button>15:00</button>
-            <button>19:00</button>
-            <p>Sexta-feira - 25/06/2021</p>
-            <button>15:00</button>
-            <button>19:00</button>
-            <Rodape/>
+        {dias.map((d, index) => 
+        <Opcao key={index}>
+            <p>{`${d.weekday} - ${d.date}`}</p>
+            <Link to={`/assentos/${d.showtimes[0].id}`}>
+            <button>{d.showtimes[0].name}</button>
+            </Link>
+            <Link to={`/assentos/${d.showtimes[1].id}`}>
+            <button>{d.showtimes[1].name}</button>
+            </Link>
+        </Opcao>
+    )}
+        <Rodape imagem={sessao.posterURL} filme={sessao.title}/>
         </SessoesDisponiveis>
         </>
     )
@@ -69,4 +97,6 @@ text-align: center;
 letter-spacing: 0.04em;
 color: #293845;
 }
+`
+const Opcao= styled.div`
 `
