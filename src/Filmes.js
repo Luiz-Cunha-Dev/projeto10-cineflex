@@ -1,18 +1,30 @@
 import styled from "styled-components"
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
 
 export default function Filmes(){
+    const [items, setItems] = useState([]);
+
+    useEffect(() => {
+        const URL = "https://mock-api.driven.com.br/api/v8/cineflex/movies"
+		const requisicao = axios.get(URL);
+
+		requisicao.then(resposta => {
+			setItems(resposta.data);
+            console.log(resposta);
+		});
+
+		requisicao.catch(erro => {
+			console.log(erro.response.data);
+		});
+	}, []);
+
     return(
         <>
         <Texto><p>Selecione o filme</p></Texto>
         <FilmesSite>
-            <Moldura><img src="https://st2.depositphotos.com/6544740/9337/i/600/depositphotos_93376372-stock-photo-sunset-over-sea-pier.jpg" alt="mar" /></Moldura>
-            <Moldura><img src="https://st2.depositphotos.com/6544740/9337/i/600/depositphotos_93376372-stock-photo-sunset-over-sea-pier.jpg" alt="mar" /></Moldura>
-            <Moldura><img src="https://st2.depositphotos.com/6544740/9337/i/600/depositphotos_93376372-stock-photo-sunset-over-sea-pier.jpg" alt="mar" /></Moldura>
-            <Moldura><img src="https://st2.depositphotos.com/6544740/9337/i/600/depositphotos_93376372-stock-photo-sunset-over-sea-pier.jpg" alt="mar" /></Moldura>
-            <Moldura><img src="https://st2.depositphotos.com/6544740/9337/i/600/depositphotos_93376372-stock-photo-sunset-over-sea-pier.jpg" alt="mar" /></Moldura>
-            <Moldura><img src="https://st2.depositphotos.com/6544740/9337/i/600/depositphotos_93376372-stock-photo-sunset-over-sea-pier.jpg" alt="mar" /></Moldura>
-            <Moldura><img src="https://st2.depositphotos.com/6544740/9337/i/600/depositphotos_93376372-stock-photo-sunset-over-sea-pier.jpg" alt="mar" /></Moldura>
-            <Moldura><img src="https://st2.depositphotos.com/6544740/9337/i/600/depositphotos_93376372-stock-photo-sunset-over-sea-pier.jpg" alt="mar" /></Moldura>
+            {items.map(i => <Link to={`/sessoes/${i.id}`}><Moldura><img src={i.posterURL} alt={i.title} /></Moldura></Link> )}
         </FilmesSite>
         </>
     )

@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import { Link } from "react-router-dom"
 
 export default function Sucesso(){
     return(
@@ -11,7 +12,9 @@ export default function Sucesso(){
            <p>Assento 15<br/>Assento 16</p>
            <h2>Comprador</h2>
            <p>Nome: João da Silva Sauro<br/>CPF: 123.456.789-10</p>
+           <Link to={'/'}>
            <button>Voltar pra Home</button>
+           </Link>
         </Informacoes>
         </>
     )
@@ -85,5 +88,6 @@ color: #FFFFFF;
 border: thin;
 margin-top: 70px;
 margin-left: -28px;
+cursor: pointer;
 }
 `

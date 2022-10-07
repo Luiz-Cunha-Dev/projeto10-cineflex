@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import Rodape from "./Rodape"
 
 export default function Sessao(){
     return(
@@ -11,6 +12,7 @@ export default function Sessao(){
             <p>Sexta-feira - 25/06/2021</p>
             <button>15:00</button>
             <button>19:00</button>
+            <Rodape/>
         </SessoesDisponiveis>
         </>
     )

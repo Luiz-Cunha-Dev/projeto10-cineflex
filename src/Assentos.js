@@ -1,5 +1,6 @@
 import styled from "styled-components"
 import Inputs from "./Inputs"
+import Rodape from "./Rodape"
 
 export default function Assentos(){
     return(
@@ -76,6 +77,7 @@ export default function Assentos(){
             </Tipo>
         </Legenda>
         <Inputs/>
+        <Rodape/>
         </ContainerAssentos>
     )
 }
