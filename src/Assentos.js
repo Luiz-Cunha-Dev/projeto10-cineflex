@@ -12,7 +12,15 @@ export default function Assentos(){
     const [assentos, setAssentos] = useState([]);
     const [filme, setFilme] = useState([]);
     const [dia, setDia] = useState([]);
+    const [assentosSelecionados, setAssentosSelecionados] = useState({
+        ids: [],
+        name: "",
+        cpf: ""
+    });
+    const [ids,setIds] = useState([])
     const {idSessao} = useParams();
+
+
     useEffect(() => {
         const URL = `https://mock-api.driven.com.br/api/v8/cineflex/showtimes/${idSessao}/seats`
 		const requisicao = axios.get(URL);
@@ -22,7 +30,7 @@ export default function Assentos(){
             setAssentos(resposta.data.seats)
             setFilme(resposta.data.movie);
             setDia(resposta.data.day)
-            console.log(resposta.data);
+            console.log(resposta.data.seats);
 		});
 
 		requisicao.catch(erro => {
@@ -36,13 +44,29 @@ export default function Assentos(){
         )
     }
 
+    function selecionar(numero){
+        let assentosReservados = assentosSelecionados;
+        if(!assentosSelecionados.ids.includes(numero)){
+            assentosReservados.ids = [...assentosReservados.ids, numero];
+            setAssentosSelecionados(assentosReservados);
+            setIds(assentosReservados.ids)
+        }else{
+            let numerosAssento = assentosSelecionados.ids;
+            numerosAssento = numerosAssento.filter(n => n !== numero);
+            assentosReservados.ids = numerosAssento;
+            setAssentosSelecionados(assentosReservados);
+            setIds(assentosReservados.ids)
+        }
+    }
+
     return(
         <ContainerAssentos>
         <Texto><p>Selecione o(s) assento(s)</p></Texto>
-        <QuadroAcentos>
-            {assentos.map(a => <button key={a.name}>{a.name}</button>)}
-            
-        </QuadroAcentos>
+
+        <QuadroAssentos >
+            {assentos.map(a => <Assento contorno={a.isAvailable === false ? "#F7C52B" : (ids.includes(a.name) ? "#0E7D71" : "#7B8B99")} fundo={a.isAvailable === false ? "#FBE192" : (ids.includes(a.name) ? "#1AAE9E" : "#C3CFD9")} onClick={() => selecionar(a.name)} key={a.name}>{a.name}</Assento>)}  
+        </QuadroAssentos>
+
         <Legenda >
             <Tipo cor={"#1AAE9E"} corBorda={"#0E7D71"}>
             <button ></button>
@@ -57,13 +81,16 @@ export default function Assentos(){
             <p>Indisponivel</p>
             </Tipo>
         </Legenda>
-        <Inputs/>
+
+        {(ids.length !== 0) ? <Inputs/> : ""}
+
         <Rodape imagem={filme.posterURL} filme={filme.title}>
              <br/> {dia.weekday} - {sessao.name}
         </Rodape>          
         </ContainerAssentos>
     )
 }
+
 
 const ContainerAssentos= styled.div`
 margin-bottom: 117px;
@@ -91,16 +118,17 @@ color: #293845;
 }
 `
 
-const QuadroAcentos= styled.div`
+const QuadroAssentos= styled.div`
 margin-left: 24px;
 margin-right: 17px;
 display: flex;
 flex-wrap: wrap;
-button{
+`
+const Assento= styled.button`
 width: 26px;
 height: 26px;
-background: #C3CFD9;
-border: 1px solid #808F9D;
+background: ${props => props.fundo};
+border: 1px solid ${props => props.contorno};//#808F9D;
 border-radius: 12px;
 margin-right: 7px;
 margin-bottom: 18px;
@@ -111,7 +139,6 @@ font-size: 11px;
 line-height: 13px;
 letter-spacing: 0.04em;
 color: #000000;
-}
 `
 
 const Legenda= styled.div`

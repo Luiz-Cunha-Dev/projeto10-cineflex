@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import { Link } from "react-router-dom"
 
 export default function Inputs(){
     return(
@@ -7,7 +8,9 @@ export default function Inputs(){
             <input type="text" placeholder="Digite seu nome..." />
             <p>CPF do comprador:</p>
             <input type="text" placeholder="Digite seu nome..." />
+            <Link to={"/sucesso"}>
             <button>Reservar assento(s)</button>
+            </Link>
         </InformacoesComprador>
     )
 }
