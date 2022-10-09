@@ -30,7 +30,7 @@ margin-top: 10px;
 font-family: 'Roboto';
 font-style: normal;
 font-weight: 400;
-font-size: 26px;
+font-size: 20px;
 line-height: 30px;
 display: flex;
 align-items: center;

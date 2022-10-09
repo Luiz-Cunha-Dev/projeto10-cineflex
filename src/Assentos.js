@@ -4,19 +4,13 @@ import Rodape from "./Rodape"
 import { useParams } from "react-router-dom"
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
 
-export default function Assentos(){
+export default function Assentos({assentosSelecionados, setAssentosSelecionados, sessao,
+     setSessao, setNumerosAssentos, numerosAssentos}){
 
-    const [sessao, setSessao] = useState([]);
     const [assentos, setAssentos] = useState([]);
     const [filme, setFilme] = useState([]);
     const [dia, setDia] = useState([]);
-    const [assentosSelecionados, setAssentosSelecionados] = useState({
-        ids: [],
-        name: "",
-        cpf: ""
-    });
     const [ids,setIds] = useState([])
     const {idSessao} = useParams();
 
@@ -30,7 +24,6 @@ export default function Assentos(){
             setAssentos(resposta.data.seats)
             setFilme(resposta.data.movie);
             setDia(resposta.data.day)
-            console.log(resposta.data.seats);
 		});
 
 		requisicao.catch(erro => {
@@ -44,18 +37,23 @@ export default function Assentos(){
         )
     }
 
-    function selecionar(numero){
+    function selecionar(idAssento, status, numero){
         let assentosReservados = assentosSelecionados;
-        if(!assentosSelecionados.ids.includes(numero)){
-            assentosReservados.ids = [...assentosReservados.ids, numero];
+        if(!assentosSelecionados.ids.includes(idAssento) && status !== false){ 
+            assentosReservados.ids = [...assentosReservados.ids, idAssento];
             setAssentosSelecionados(assentosReservados);
             setIds(assentosReservados.ids)
+            setNumerosAssentos([...numerosAssentos, numero])
         }else{
-            let numerosAssento = assentosSelecionados.ids;
-            numerosAssento = numerosAssento.filter(n => n !== numero);
-            assentosReservados.ids = numerosAssento;
+            let idAssentosAssento = assentosSelecionados.ids;
+            idAssentosAssento = idAssentosAssento.filter(n => n !== idAssento);
+            assentosReservados.ids = idAssentosAssento;
             setAssentosSelecionados(assentosReservados);
             setIds(assentosReservados.ids)
+        }
+
+        if(status !== true){
+            alert("Esse assento não está disponível")
         }
     }
 
@@ -64,7 +62,10 @@ export default function Assentos(){
         <Texto><p>Selecione o(s) assento(s)</p></Texto>
 
         <QuadroAssentos >
-            {assentos.map(a => <Assento contorno={a.isAvailable === false ? "#F7C52B" : (ids.includes(a.name) ? "#0E7D71" : "#7B8B99")} fundo={a.isAvailable === false ? "#FBE192" : (ids.includes(a.name) ? "#1AAE9E" : "#C3CFD9")} onClick={() => selecionar(a.name)} key={a.name}>{a.name}</Assento>)}  
+            {assentos.map(a => 
+            <Assento contorno={a.isAvailable === false ? "#F7C52B" : (ids.includes(a.id) ? "#0E7D71" : "#7B8B99")}
+            fundo={a.isAvailable === false ? "#FBE192" : (ids.includes(a.id) ? "#1AAE9E" : "#C3CFD9")}
+            onClick={() => selecionar(a.id, a.isAvailable, a.name)} key={a.name}>{a.name}</Assento>)}  
         </QuadroAssentos>
 
         <Legenda >
@@ -82,7 +83,7 @@ export default function Assentos(){
             </Tipo>
         </Legenda>
 
-        {(ids.length !== 0) ? <Inputs/> : ""}
+        {(ids.length !== 0) ? <Inputs assentosSelecionados={assentosSelecionados} setAssentosSelecionados={setAssentosSelecionados}/> : ""}
 
         <Rodape imagem={filme.posterURL} filme={filme.title}>
              <br/> {dia.weekday} - {sessao.name}

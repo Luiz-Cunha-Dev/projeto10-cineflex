@@ -1,17 +1,33 @@
 import styled from "styled-components"
 import { Link } from "react-router-dom"
+import { useEffect } from "react";
+import axios  from "axios";
 
-export default function Sucesso(){
+export default function Sucesso({assentosSelecionados, sessao, numerosAssentos}){
+    let assentos = assentosSelecionados.ids;
+    let filme = sessao.movie.title
+    let data = sessao.day.date;
+    let hora= sessao.name;
+
+    useEffect(() => {
+        const URL = "https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many"
+		const requisicao = axios.post(URL, assentosSelecionados);
+
+		requisicao.then(resposta => console.log(resposta));
+
+		requisicao.catch(erro => console.log(erro));
+	}, []);
+
     return(
         <>
         <Texto><h1>Pedido feito<br/>com sucesso!</h1></Texto>
         <Informacoes>
            <h2>Filme e sessão</h2> 
-           <p>Enola Holmes<br/>24/06/2021 15:00</p>
+           <p>{filme}<br/>{data} {hora}</p>
            <h2>Ingressos</h2>
-           <p>Assento 15<br/>Assento 16</p>
+           {numerosAssentos.map(a => <p key={a} >Assento {a}</p>)}
            <h2>Comprador</h2>
-           <p>Nome: João da Silva Sauro<br/>CPF: 123.456.789-10</p>
+           <p>Nome: {assentosSelecionados.name}<br/>CPF: {assentosSelecionados.cpf}</p>
            <Link to={'/'}>
            <button>Voltar pra Home</button>
            </Link>

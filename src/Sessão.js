@@ -15,7 +15,6 @@ export default function Sessao(){
 
 		requisicao.then(resposta => {
 			setSessao(resposta.data);
-            console.log(resposta.data);
             setDias(resposta.data.days)
 		});
 
