@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom"
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import loading from "./img/loading.gif"
 
 export default function Sessao({setBotao}){
     const [sessao, setSessao] = useState([]);
@@ -23,6 +24,15 @@ export default function Sessao({setBotao}){
 			console.log(erro.response.data);
 		});
 	}, []);
+
+
+    if(sessao.length === 0){   
+        return(
+            <TelaDeCarregamento>
+            <img src={loading} alt="loading" />
+            </TelaDeCarregamento>            
+        )
+    }
 
 
     return(
@@ -98,5 +108,13 @@ letter-spacing: 0.04em;
 color: #293845;
 }
 `
+
 const Opcao= styled.div`
+`
+
+const TelaDeCarregamento= styled.div`
+height: 100vh;
+display: flex;
+justify-content: center;
+align-items: center;
 `

@@ -4,6 +4,7 @@ import Rodape from "./Rodape"
 import { useParams } from "react-router-dom"
 import { useState, useEffect } from "react";
 import axios from "axios";
+import loading from "./img/loading.gif"
 
 export default function Assentos({assentosSelecionados, setAssentosSelecionados, sessao, setSessao, setNumerosAssentos, numerosAssentos, setBotao}){
 
@@ -30,11 +31,7 @@ export default function Assentos({assentosSelecionados, setAssentosSelecionados,
 		requisicao.catch(erro => {
 			console.log(erro.response.data)})}, []);
 
-    if(sessao === []){
-        return(
-            <p>Loading...</p>
-        )
-    }
+            
 
     function selecionar(idAssento, status, numero){
         let assentosReservados = assentosSelecionados;
@@ -58,6 +55,14 @@ export default function Assentos({assentosSelecionados, setAssentosSelecionados,
         if(status !== true){
             alert("Esse assento não está disponível")
         }
+    }
+
+    if(assentos.length === 0){   
+        return(
+            <TelaDeCarregamento>
+            <img src={loading} alt="loading" />
+            </TelaDeCarregamento>            
+        )
     }
 
     return(
@@ -178,3 +183,9 @@ border: 1px solid ${props => props.corBorda};
 }
 `
 
+const TelaDeCarregamento= styled.div`
+height: 100vh;
+display: flex;
+justify-content: center;
+align-items: center;
+`

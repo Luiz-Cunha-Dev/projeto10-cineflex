@@ -8,7 +8,7 @@ export default function Inputs({assentosSelecionados, setAssentosSelecionados}){
     const [cpf, setCpf] = useState("")
 
 function cadastrar(){
-    if(cpf.length < 11){
+    if(cpf.length !== 11){
         alert("CPF invalido!")
     }
     if(nome === ""){

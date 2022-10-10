@@ -2,6 +2,7 @@ import styled from "styled-components"
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import loading from "./img/loading.gif"
 
 
 export default function Filmes({setBotao}){
@@ -21,13 +22,23 @@ export default function Filmes({setBotao}){
 		});
 	}, []);
 
+
+    if(itens.length === 0){   
+        return(
+            <TelaDeCarregamento>
+            <img src={loading} alt="loading" />
+            </TelaDeCarregamento>            
+        )
+    }
+    
+
     return(
         <>
         <Texto><p>Selecione o filme</p></Texto>
         <FilmesSite>
-            {itens.map(i => 
-            <Link to={`/sessoes/${i.id}`}>
-            <Moldura><img  key={i.id} src={i.posterURL} alt={i.title} /></Moldura>
+            {itens.map((i, index) => 
+            <Link key={index} to={`/sessoes/${i.id}`}>
+            <Moldura ><img src={i.posterURL} alt={i.title} /></Moldura>
             </Link> )}
         </FilmesSite>
         </>
@@ -71,4 +82,10 @@ background: #FFFFFF;
 box-shadow: 0px 2px 4px 2px rgba(0, 0, 0, 0.1);
 border-radius: 3px;
 margin-bottom: 27px;
+`
+const TelaDeCarregamento= styled.div`
+height: 100vh;
+display: flex;
+justify-content: center;
+align-items: center;
 `
