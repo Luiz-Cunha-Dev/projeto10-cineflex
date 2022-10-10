@@ -4,8 +4,7 @@ import { useEffect } from "react";
 import axios  from "axios";
 
 export default function Sucesso({assentosSelecionados, sessao, numerosAssentos}){
-    let assentos = assentosSelecionados.ids;
-    let filme = sessao.movie.title
+    let filme = sessao.movie.title;
     let data = sessao.day.date;
     let hora= sessao.name;
 
@@ -29,7 +28,7 @@ export default function Sucesso({assentosSelecionados, sessao, numerosAssentos})
            <h2>Comprador</h2>
            <p>Nome: {assentosSelecionados.name}<br/>CPF: {assentosSelecionados.cpf}</p>
            <Link to={'/'}>
-           <button>Voltar pra Home</button>
+           <button >Voltar pra Home</button>
            </Link>
         </Informacoes>
         </>

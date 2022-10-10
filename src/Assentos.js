@@ -5,14 +5,13 @@ import { useParams } from "react-router-dom"
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-export default function Assentos({assentosSelecionados, setAssentosSelecionados, sessao,
-     setSessao, setNumerosAssentos, numerosAssentos}){
+export default function Assentos({assentosSelecionados, setAssentosSelecionados, sessao, setSessao, setNumerosAssentos, numerosAssentos}){
 
     const [assentos, setAssentos] = useState([]);
     const [filme, setFilme] = useState([]);
     const [dia, setDia] = useState([]);
     const [ids,setIds] = useState([])
-    const {idSessao} = useParams();
+    const {idSessao} = useParams(); 
 
 
     useEffect(() => {
@@ -24,12 +23,11 @@ export default function Assentos({assentosSelecionados, setAssentosSelecionados,
             setAssentos(resposta.data.seats)
             setFilme(resposta.data.movie);
             setDia(resposta.data.day)
+            setNumerosAssentos([])
 		});
 
 		requisicao.catch(erro => {
-			console.log(erro.response.data);
-		});
-	}, []);
+			console.log(erro.response.data)})}, []);
 
     if(sessao === []){
         return(
@@ -50,6 +48,10 @@ export default function Assentos({assentosSelecionados, setAssentosSelecionados,
             assentosReservados.ids = idAssentosAssento;
             setAssentosSelecionados(assentosReservados);
             setIds(assentosReservados.ids)
+
+            let numeroSelecionado = numerosAssentos
+            numeroSelecionado = numeroSelecionado.filter(n => n !== numero)
+            setNumerosAssentos(numeroSelecionado)
         }
 
         if(status !== true){

@@ -24,7 +24,10 @@ export default function Filmes(){
         <>
         <Texto><p>Selecione o filme</p></Texto>
         <FilmesSite>
-            {itens.map(i => <Link to={`/sessoes/${i.id}`}><Moldura><img key={i.id} src={i.posterURL} alt={i.title} /></Moldura></Link> )}
+            {itens.map(i => 
+            <Link to={`/sessoes/${i.id}`}>
+            <Moldura><img  key={i.id} src={i.posterURL} alt={i.title} /></Moldura>
+            </Link> )}
         </FilmesSite>
         </>
     )
