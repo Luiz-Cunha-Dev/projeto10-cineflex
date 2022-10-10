@@ -71,22 +71,22 @@ export default function Assentos({assentosSelecionados, setAssentosSelecionados,
 
         <QuadroAssentos >
             {assentos.map(a => 
-            <Assento contorno={a.isAvailable === false ? "#F7C52B" : (ids.includes(a.id) ? "#0E7D71" : "#7B8B99")}
+            <Assento data-identifier="seat" contorno={a.isAvailable === false ? "#F7C52B" : (ids.includes(a.id) ? "#0E7D71" : "#7B8B99")}
             fundo={a.isAvailable === false ? "#FBE192" : (ids.includes(a.id) ? "#1AAE9E" : "#C3CFD9")}
             onClick={() => selecionar(a.id, a.isAvailable, a.name)} key={a.name}>{a.name}</Assento>)}  
         </QuadroAssentos>
 
         <Legenda >
             <Tipo cor={"#1AAE9E"} corBorda={"#0E7D71"}>
-            <button ></button>
+            <button data-identifier="seat-selected-subtitle" ></button>
             <p>Selecionado</p>
             </Tipo>
             <Tipo cor={"#C3CFD9"} corBorda={"#7B8B99"}>
-            <button></button>
+            <button data-identifier="seat-available-subtitle" ></button>
             <p>Disponivel</p>
             </Tipo>
             <Tipo cor={"#FBE192"} corBorda={"#F7C52B"}>
-            <button></button>
+            <button data-identifier="seat-unavailable-subtitle" ></button>
             <p>Indisponivel</p>
             </Tipo>
         </Legenda>

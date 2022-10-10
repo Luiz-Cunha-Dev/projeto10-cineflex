@@ -41,12 +41,12 @@ export default function Sessao({setBotao}){
         <SessoesDisponiveis>
         {dias.map((d, index) => 
         <Opcao key={index}>
-            <p>{`${d.weekday} - ${d.date}`}</p>
+            <p data-identifier="session-date">{`${d.weekday} - ${d.date}`}</p>
             <Link to={`/assentos/${d.showtimes[0].id}`}>
-            <button>{d.showtimes[0].name}</button>
+            <button data-identifier="hour-minute-btn">{d.showtimes[0].name}</button>
             </Link>
             <Link to={`/assentos/${d.showtimes[1].id}`}>
-            <button>{d.showtimes[1].name}</button>
+            <button data-identifier="hour-minute-btn">{d.showtimes[1].name}</button>
             </Link>
         </Opcao>
     )}

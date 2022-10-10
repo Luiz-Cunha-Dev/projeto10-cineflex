@@ -25,13 +25,13 @@ export default function Sucesso({assentosSelecionados, sessao, numerosAssentos, 
         <Texto><h1>Pedido feito<br/>com sucesso!</h1></Texto>   
         <Informacoes>
            <h2>Filme e sessão</h2> 
-           <p>{filme}<br/>{data} {hora}</p>
+           <p data-identifier="movie-session-infos-reserve-finished" >{filme}<br/>{data} {hora}</p>
            <h2>Ingressos</h2>
-           {numerosAssentos.map(a => <p key={a} >Assento {a}</p>)}
+           {numerosAssentos.map(a => <p data-identifier="seat-infos-reserve-finished" key={a} >Assento {a}</p>)}
            <h2>Comprador</h2>
-           <p>Nome: {assentosSelecionados.name}<br/>CPF: {assentosSelecionados.cpf}</p>
+           <p data-identifier="buyer-infos-reserve-finished">Nome: {assentosSelecionados.name}<br/>CPF: {assentosSelecionados.cpf}</p>
            <Link to={'/'}>
-           <button >Voltar pra Home</button>
+           <button data-identifier="back-to-home-btn" >Voltar pra Home</button>
            </Link>
         </Informacoes>
         </>

@@ -38,7 +38,7 @@ export default function Filmes({setBotao}){
         <FilmesSite>
             {itens.map((i, index) => 
             <Link key={index} to={`/sessoes/${i.id}`}>
-            <Moldura ><img src={i.posterURL} alt={i.title} /></Moldura>
+            <Moldura data-identifier="movie-outdoor" ><img src={i.posterURL} alt={i.title} /></Moldura>
             </Link> )}
         </FilmesSite>
         </>

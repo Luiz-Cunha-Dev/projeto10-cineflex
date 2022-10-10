@@ -3,8 +3,8 @@ import styled from "styled-components"
 export default function Rodape(props){
     return(
         <RodapePagina>
-            <Moldura><img src={props.imagem} alt={props.filme} /></Moldura>
-            <p>{props.filme}{props.children}</p>
+            <Moldura data-identifier="movie-img-preview" ><img src={props.imagem} alt={props.filme} /></Moldura>
+            <p data-identifier="movie-and-session-infos-preview">{props.filme}{props.children}</p>
         </RodapePagina>
 
     )

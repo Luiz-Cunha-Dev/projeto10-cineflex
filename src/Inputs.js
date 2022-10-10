@@ -37,14 +37,14 @@ function cadastrar(){
         <InformacoesComprador>
             <form>
             <p>Nome do comprador:</p>
-            <input type="name" placeholder="Digite seu nome..." 
+            <input data-identifier="buyer-name-input" type="name" placeholder="Digite seu nome..." 
             onChange={e => setNome(e.target.value)}
             />
             <p>CPF do comprador:</p>
-            <input type="text" placeholder="Digite seu CPF..."
+            <input data-identifier="buyer-cpf-input" type="text" placeholder="Digite seu CPF..."
             onChange={e => setCpf(e.target.value)} />
             <StyledLink to={(cpf.length !== 11 || nome === "") ? "" : "/sucesso"}>
-            <button onClick={() => cadastrar()} >Reservar assento(s)</button>
+            <button data-identifier="reservation-btn" onClick={() => cadastrar()} >Reservar assento(s)</button>
             </StyledLink>
             </form>
         </InformacoesComprador>
