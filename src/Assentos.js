@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom"
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-export default function Assentos({assentosSelecionados, setAssentosSelecionados, sessao, setSessao, setNumerosAssentos, numerosAssentos}){
+export default function Assentos({assentosSelecionados, setAssentosSelecionados, sessao, setSessao, setNumerosAssentos, numerosAssentos, setBotao}){
 
     const [assentos, setAssentos] = useState([]);
     const [filme, setFilme] = useState([]);
@@ -24,6 +24,7 @@ export default function Assentos({assentosSelecionados, setAssentosSelecionados,
             setFilme(resposta.data.movie);
             setDia(resposta.data.day)
             setNumerosAssentos([])
+            setBotao(true)
 		});
 
 		requisicao.catch(erro => {

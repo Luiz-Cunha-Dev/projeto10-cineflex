@@ -1,8 +1,10 @@
 import styled from "styled-components"
 
-export default function Topo(){
+export default function Topo(props){
+
     return(
         <TopoSite>
+            {props.children}
             <p>CINEFLEX</p>
         </TopoSite>
     )
@@ -27,6 +29,13 @@ line-height: 40px;
 display: flex;
 align-items: center;
 text-align: center;
-color: #E8833A; 
+color: #E8833A;
+position: relative;
+}
+img{
+width: 35px;
+position: absolute;
+left: 0;
+margin-left: 10px;
 }
 `

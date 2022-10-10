@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-export default function Sessao(){
+export default function Sessao({setBotao}){
     const [sessao, setSessao] = useState([]);
     const [dias, setDias] = useState([]);
     const {idFilme} = useParams();
@@ -16,6 +16,7 @@ export default function Sessao(){
 		requisicao.then(resposta => {
 			setSessao(resposta.data);
             setDias(resposta.data.days)
+            setBotao(true)
 		});
 
 		requisicao.catch(erro => {

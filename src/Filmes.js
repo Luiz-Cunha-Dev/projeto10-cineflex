@@ -4,7 +4,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 
 
-export default function Filmes(){
+export default function Filmes({setBotao}){
     const [itens, setItens] = useState([]);
 
     useEffect(() => {
@@ -13,6 +13,7 @@ export default function Filmes(){
 
 		requisicao.then(resposta => {
 			setItens(resposta.data);
+            setBotao(false)
 		});
 
 		requisicao.catch(erro => {

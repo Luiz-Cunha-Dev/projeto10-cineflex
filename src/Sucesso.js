@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 import { useEffect } from "react";
 import axios  from "axios";
 
-export default function Sucesso({assentosSelecionados, sessao, numerosAssentos}){
+export default function Sucesso({assentosSelecionados, sessao, numerosAssentos, setBotao}){
     let filme = sessao.movie.title;
     let data = sessao.day.date;
     let hora= sessao.name;
@@ -12,14 +12,17 @@ export default function Sucesso({assentosSelecionados, sessao, numerosAssentos})
         const URL = "https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many"
 		const requisicao = axios.post(URL, assentosSelecionados);
 
-		requisicao.then(resposta => console.log(resposta));
+		requisicao.then(resposta => {
+            console.log(resposta);
+            setBotao(true)}
+            );
 
 		requisicao.catch(erro => console.log(erro));
 	}, []);
 
     return(
         <>
-        <Texto><h1>Pedido feito<br/>com sucesso!</h1></Texto>
+        <Texto><h1>Pedido feito<br/>com sucesso!</h1></Texto>   
         <Informacoes>
            <h2>Filme e sessão</h2> 
            <p>{filme}<br/>{data} {hora}</p>
